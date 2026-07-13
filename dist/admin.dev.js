@@ -14,7 +14,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
    NOTE: This is a front-end demo. In production, authenticate
    against a real backend — never ship a hardcoded password.
    ============================================================ */
-var ADMIN_DEMO_PASSWORD = 'admin123';
+var ADMIN_DEMO_PASSWORD = 'SDRRS2.0';
 document.addEventListener('DOMContentLoaded', function () {
   var loginView = document.getElementById('loginView');
   var dashView = document.getElementById('dashView');
