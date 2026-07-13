@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>First Aid AI Assistant — SDRRS</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="animations.css">
+<style>
+  .chat-shell{ display:grid; grid-template-columns:280px 1fr; gap:22px; height:640px; }
+  @media (max-width:860px){ .chat-shell{ grid-template-columns:1fr; height:auto; } }
+  .chat-suggestions{ padding:22px; overflow-y:auto; }
+  .chat-suggestions h4{ font-size:14px; color:var(--text-muted); margin-bottom:14px; }
+  .suggest-btn{
+    display:block; width:100%; text-align:left; padding:11px 14px; margin-bottom:8px;
+    border-radius:var(--radius-sm); border:1px solid var(--glass-border); background:var(--glass);
+    color:var(--text-primary); font-size:14px; cursor:pointer; transition:all .2s ease;
+  }
+  .suggest-btn:hover{ border-color:var(--signal); background:rgba(47,208,255,0.08); }
+  .chat-window{ display:flex; flex-direction:column; padding:0; overflow:hidden; }
+  .chat-header{ padding:18px 22px; border-bottom:1px solid var(--glass-border-soft); display:flex; align-items:center; gap:12px; }
+  .chat-avatar{ width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg,var(--signal),#1176ab); display:flex; align-items:center; justify-content:center; font-size:18px; }
+  .chat-messages{ flex:1; overflow-y:auto; padding:22px; display:flex; flex-direction:column; gap:16px; }
+  .msg{ max-width:75%; padding:13px 16px; border-radius:16px; font-size:15px; line-height:1.5; }
+  .msg.bot{ align-self:flex-start; background:var(--glass-strong); border:1px solid var(--glass-border); border-bottom-left-radius:4px; }
+  .msg.user{ align-self:flex-end; background:linear-gradient(135deg, var(--signal), #1176ab); color:#04121c; border-bottom-right-radius:4px; font-weight:600; }
+  .chat-input-row{ display:flex; gap:10px; padding:16px 22px; border-top:1px solid var(--glass-border-soft); }
+  .chat-input-row input{ flex:1; }
+  .disclaimer{ font-size:12.5px; color:var(--text-faint); padding:0 22px 14px; }
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark"></span>
+      <span>SDRRS<br><small>DISASTER RESPONSE NETWORK</small></span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="report.html">Report</a></li>
+        <li><a href="map.html">Live Map</a></li>
+        <li><a href="volunteer.html">Volunteer</a></li>
+        <li><a href="contacts.html">Contacts</a></li>
+        <li><a href="chatbot.html">First Aid AI</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta"><a href="report.html" class="btn btn-signal btn-sm">Report now</a></div>
+    <button type="button" class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+  </div>
+</header>
+
+<div class="container page-head" data-reveal>
+  <div class="eyebrow">Quick guidance while help is on the way</div>
+  <h1>First aid AI assistant</h1>
+  <p>Ask about CPR, bleeding, burns, choking, fractures and more. This is not a substitute for professional medical care — call emergency services for anything serious.</p>
+</div>
+
+<section class="container" style="padding-bottom:100px;">
+  <div class="chat-shell" data-reveal>
+    <div class="chat-suggestions glass">
+      <h4>TRY ASKING ABOUT</h4>
+      <button type="button" class="suggest-btn" data-q="How do I perform CPR?">CPR steps</button>
+      <button type="button" class="suggest-btn" data-q="How do I stop severe bleeding?">Severe bleeding</button>
+      <button type="button" class="suggest-btn" data-q="What do I do for a burn?">Burns</button>
+      <button type="button" class="suggest-btn" data-q="Someone is choking, what do I do?">Choking</button>
+      <button type="button" class="suggest-btn" data-q="How do I treat a suspected fracture?">Fractures</button>
+      <button type="button" class="suggest-btn" data-q="What should I do during a flood?">Flood safety</button>
+      <button type="button" class="suggest-btn" data-q="What should I do during an earthquake?">Earthquake safety</button>
+      <button type="button" class="suggest-btn" data-q="What do I do in a house fire?">Fire safety</button>
+      <button type="button" class="suggest-btn" data-q="How do I treat shock?">Shock</button>
+    </div>
+    <div class="chat-window glass">
+      <div class="chat-header">
+        <div class="chat-avatar">🤖</div>
+        <div>
+          <div style="font-weight:700;">SDRRS First Aid Assistant</div>
+          <div style="font-size:12.5px;color:var(--text-muted);"><span class="live-dot"></span> Online</div>
+        </div>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg bot">Hi, I'm here to help with quick first aid guidance during an emergency. What's happening?</div>
+      </div>
+      <div class="disclaimer">⚠️ For informational purposes only — always call emergency services for serious situations.</div>
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" placeholder="Type your question...">
+        <button type="submit" class="btn btn-signal" id="chatSend">Send</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="container">
+  <div class="footer-bottom">
+    <span>© 2026 Smart Disaster Response &amp; Rescue System</span>
+    <span>Built for communities, run by volunteers.</span>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script src="chatbot.js"></script>
+</body>
+</html>

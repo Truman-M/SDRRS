@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard — SDRRS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animations.css">
+    <style>
+        .dash-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 36px;
+        }
+
+        @media (max-width:900px) {
+            .dash-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .dash-stat {
+            padding: 22px;
+            border-radius: var(--radius-lg);
+        }
+
+        .dash-stat .num {
+            font-family: var(--font-display);
+            font-size: 32px;
+            color: var(--text-primary);
+        }
+
+        .dash-stat .lbl {
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .dash-panel {
+            padding: 26px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 30px;
+        }
+
+        .dash-panel-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        #chartCanvas {
+            width: 100%;
+            height: 220px;
+        }
+
+        .login-shell {
+            max-width: 420px;
+            margin: 60px auto;
+            padding: 38px;
+            border-radius: var(--radius-lg);
+            text-align: center;
+        }
+
+        .login-shell .tilt-icon {
+            margin: 0 auto 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="container nav-inner">
+            <a href="index.html" class="brand">
+                <span class="brand-mark"></span>
+                <span>SDRRS<br><small>DISASTER RESPONSE NETWORK</small></span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="report.html">Report</a></li>
+                    <li><a href="map.html">Live Map</a></li>
+                    <li><a href="volunteer.html">Volunteer</a></li>
+                    <li><a href="contact.html">Contacts</a></li>
+                    <li><a href="chatbot.html">First Aid AI</a></li>
+                    <li><a href="admin.html" class="active">Admin</a></li>
+                </ul>
+            </nav>
+            <div class="nav-cta"><button type="button" class="btn btn-ghost btn-sm" id="logoutBtn" style="display:none;">Log
+                    out</button></div>
+            <button type="button" class="nav-toggle" aria-label="Toggle menu"
+                onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+        </div>
+    </header>
+
+    <!-- ==================== LOGIN GATE ==================== -->
+    <div class="container" id="loginView">
+        <div class="login-shell glass" data-reveal>
+            <div class="tilt-icon ic-signal" style="width:60px;height:60px;font-size:26px;">🔒</div>
+            <h2>Admin sign in</h2>
+            <p>This dashboard is for response coordinators. <strong class="mono"></strong></p>
+            <div class="field full">
+                <input type="password" id="adminPass" placeholder="Enter admin password">
+            </div>
+            <button type="button" class="btn btn-primary btn-block" id="loginBtn">Sign in</button>
+            <p id="loginError" style="color:var(--alert); font-size:13.5px; margin-top:12px; display:none;">Incorrect
+                password. Try again.</p>
+        </div>
+    </div>
+
+    <!-- ==================== DASHBOARD ==================== -->
+    <div class="container" id="dashView" style="display:none;">
+        <div class="page-head" data-reveal>
+            <div class="eyebrow"><span class="live-dot"></span> Coordinator view</div>
+            <h1>Response dashboard</h1>
+            <p>Monitor incoming reports, update their status, and see who's registered to help.</p>
+        </div>
+
+        <div class="dash-stats">
+            <div class="dash-stat glass" data-reveal>
+                <div class="num" id="dTotal">0</div>
+                <div class="lbl">Total reports</div>
+            </div>
+            <div class="dash-stat glass" data-reveal style="--delay:.05s">
+                <div class="num" id="dUrgent">0</div>
+                <div class="lbl">Urgent / SOS</div>
+            </div>
+            <div class="dash-stat glass" data-reveal style="--delay:.1s">
+                <div class="num" id="dResolved">0</div>
+                <div class="lbl">Resolved</div>
+            </div>
+            <div class="dash-stat glass" data-reveal style="--delay:.15s">
+                <div class="num" id="dVolunteers">0</div>
+                <div class="lbl">Volunteers</div>
+            </div>
+        </div>
+
+        <div class="dash-panel glass" data-reveal>
+            <div class="dash-panel-head">
+                <h3 class="mb-0">Reports by type</h3>
+            </div>
+            <canvas id="chartCanvas"></canvas>
+        </div>
+
+        <div class="dash-panel glass" data-reveal>
+            <div class="dash-panel-head">
+                <h3 class="mb-0">Incoming reports</h3>
+                <div class="flex gap-8">
+                    <select id="statusFilter" class="status-select" style="padding:9px 12px;">
+                        <option value="all">All statuses</option>
+                        <option value="pending">Pending</option>
+                        <option value="progress">In progress</option>
+                        <option value="resolved">Resolved</option>
+                    </select>
+                    <button type="button" class="btn btn-ghost btn-sm" id="clearReportsBtn">Clear all</button>
+                </div>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Type</th>
+                            <th>Severity</th>
+                            <th>Reported</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reportsTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="dash-panel glass" data-reveal>
+            <div class="dash-panel-head">
+                <h3 class="mb-0">Registered volunteers</h3>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Location</th>
+                            <th>Skills</th>
+                            <th>Availability</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminVolunteersBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer class="container">
+        <div class="footer-bottom">
+            <span>© 2026 Smart Disaster Response &amp; Rescue System</span>
+            <span>Built for communities, run by volunteers.</span>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script src="admin.js"></script>
+</body>
+
+</html>

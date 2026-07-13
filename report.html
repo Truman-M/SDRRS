@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report an Emergency — SDRRS</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="animations.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark"></span>
+      <span>SDRRS<br><small>DISASTER RESPONSE NETWORK</small></span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="report.html">Report</a></li>
+        <li><a href="map.html">Live Map</a></li>
+        <li><a href="volunteer.html">Volunteer</a></li>
+        <li><a href="contact.html">Contacts</a></li>
+        <li><a href="chatbot.html">First Aid AI</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta"><a href="map.html" class="btn btn-signal btn-sm">View map</a></div>
+    <button type="button" class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+  </div>
+</header>
+
+<div class="container page-head" data-reveal>
+  <div class="eyebrow">Live emergency reporting</div>
+  <h1>Tell us what's happening</h1>
+  <p>Fill in a few details and share your location — your report appears on the live map immediately so the nearest responders can see it.</p>
+</div>
+
+<section class="container" style="padding-bottom:90px;">
+  <div class="form-panel glass" data-reveal>
+    <form id="reportForm">
+      <div class="location-box">
+        <div>
+          <div class="status" id="locStatus">Location not shared yet</div>
+          <div class="coords mono" id="locCoords"></div>
+        </div>
+        <button type="button" class="btn btn-signal btn-sm" id="locBtn">📍 Use my current location</button>
+      </div>
+
+      <div class="form-grid">
+        <div class="field">
+          <label for="type">Type of disaster <span class="req">*</span></label>
+          <select id="type" required>
+            <option value="" disabled selected>Select a type</option>
+            <option>Flood</option>
+            <option>Fire</option>
+            <option>Earthquake</option>
+            <option>Building Collapse</option>
+            <option>Medical</option>
+            <option>Road Accident</option>
+            <option>Storm / High Winds</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="name">Your name (optional)</label>
+          <input type="text" id="name" placeholder="e.g. Kwame Asante">
+        </div>
+      </div>
+
+      <div class="field full">
+        <label>Severity <span class="req">*</span></label>
+        <div class="severity-row">
+          <label class="severity-opt low"><input type="radio" name="severity" value="low"> Low</label>
+          <label class="severity-opt med"><input type="radio" name="severity" value="medium"> Medium</label>
+          <label class="severity-opt high"><input type="radio" name="severity" value="high"> High / life-threatening</label>
+        </div>
+      </div>
+
+      <div class="field full">
+        <label for="desc">Describe the situation <span class="req">*</span></label>
+        <textarea id="desc" placeholder="What's happening, how many people are affected, any immediate dangers..." required></textarea>
+      </div>
+
+      <div class="field full">
+        <label for="photo">Attach a photo (optional)</label>
+        <input type="file" id="photo" accept="image/*">
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">Submit report</button>
+    </form>
+  </div>
+</section>
+
+<!-- ============================ SOS SECTION ============================ -->
+<section id="sos" class="container" style="padding-bottom:100px;">
+  <div class="section-head" data-reveal>
+    <div class="eyebrow">In immediate danger?</div>
+    <h2>Send a one-tap rescue request</h2>
+    <p>This skips the form and sends your live location as an urgent case straight away.</p>
+  </div>
+  <div class="text-center" data-reveal>
+    <button type="button" class="btn btn-primary" style="padding:22px 46px;font-size:19px;" onclick="document.getElementById('sdrrsFab').click()">
+      🚨 Request emergency rescue now
+    </button>
+  </div>
+</section>
+
+<!-- Success modal -->
+<div class="modal-backdrop" id="successModal">
+  <div class="modal-box glass-strong text-center">
+    <button type="button" class="modal-close" id="successClose">&times;</button>
+    <div class="check-pop">✓</div>
+    <h3>Report submitted</h3>
+    <p>Your report <strong id="successId" class="mono"></strong> is now live on the map. Responders in your area have been notified.</p>
+    <a href="map.html" class="btn btn-signal btn-block">View it on the live map</a>
+  </div>
+</div>
+
+<footer class="container">
+  <div class="footer-bottom">
+    <span>© 2026 Smart Disaster Response &amp; Rescue System</span>
+    <span>Built for communities, run by volunteers.</span>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script src="report.js"></script>
+</body>
+</html>
