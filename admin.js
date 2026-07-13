@@ -5,7 +5,7 @@
    against a real backend — never ship a hardcoded password.
    ============================================================ */
 
-const ADMIN_DEMO_PASSWORD = 'admin123';
+const ADMIN_DEMO_PASSWORD = 'SDRRS2.0';
 
 document.addEventListener('DOMContentLoaded', () => {
   const loginView = document.getElementById('loginView');
