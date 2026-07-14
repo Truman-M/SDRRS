@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volunteer Registration — SDRRS</title>
+<link rel="stylesheet" href="smooth-transitions.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="animations.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark"></span>
+      <span>SDRRS<br><small>DISASTER RESPONSE NETWORK</small></span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="report.html">Report</a></li>
+        <li><a href="map.html">Live Map</a></li>
+        <li><a href="volunteer.html">Volunteer</a></li>
+        <li><a href="contact.html">Contacts</a></li>
+        <li><a href="chatbot.html">First Aid AI</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta"><a href="report.html" class="btn btn-signal btn-sm">Report now</a></div>
+    <button type="button" class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+  </div>
+</header>
+
+<div class="container page-head" data-reveal>
+  <div class="eyebrow">Join the response network</div>
+  <h1>Register as a volunteer</h1>
+  <p>Tell us your skills and availability. Coordinators will reach out when there's a case near you that matches.</p>
+</div>
+
+<section class="container" style="padding-bottom:100px;">
+  <div class="form-panel glass" data-reveal>
+    <form id="volunteerForm">
+      <div class="form-grid">
+        <div class="field">
+          <label for="volName">Full name <span class="req">*</span></label>
+          <input type="text" id="volName" placeholder="e.g. Adjoa Osei" required>
+        </div>
+        <div class="field">
+          <label for="volPhone">Phone number <span class="req">*</span></label>
+          <input type="tel" id="volPhone" placeholder="+233 55 123 4567" required>
+        </div>
+        <div class="field">
+          <label for="volEmail">Email (optional)</label>
+          <input type="email" id="volEmail" placeholder="you@example.com">
+        </div>
+        <div class="field">
+          <label for="volLocation">Location / area <span class="req">*</span></label>
+          <input type="text" id="volLocation" placeholder="e.g. Osu, Accra" required>
+        </div>
+      </div>
+
+      <div class="field full">
+        <label>Skills <span class="req">*</span></label>
+        <div class="checkbox-grid">
+          <label class="chip-check"><input type="checkbox" value="First Aid"> First Aid</label>
+          <label class="chip-check"><input type="checkbox" value="Search &amp; Rescue"> Search &amp; Rescue</label>
+          <label class="chip-check"><input type="checkbox" value="Medical"> Medical / Nursing</label>
+          <label class="chip-check"><input type="checkbox" value="Driving"> Driving / Transport</label>
+          <label class="chip-check"><input type="checkbox" value="Logistics"> Logistics &amp; Supplies</label>
+          <label class="chip-check"><input type="checkbox" value="Communication"> Communication / Translation</label>
+        </div>
+      </div>
+
+      <div class="field full">
+        <label for="volAvailability">Availability <span class="req">*</span></label>
+        <select id="volAvailability" required>
+          <option value="" disabled selected>Select availability</option>
+          <option>Anytime</option>
+          <option>Weekdays</option>
+          <option>Weekends</option>
+          <option>Evenings only</option>
+          <option>On-call / emergencies only</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-rescue btn-block">Register as volunteer</button>
+    </form>
+  </div>
+
+  <div class="section-head" style="margin-top:70px;" data-reveal>
+    <div class="eyebrow">Community</div>
+    <h2>Registered volunteers</h2>
+    <p>A snapshot of people already standing by to help.</p>
+  </div>
+  <div class="table-wrap glass" data-reveal>
+    <table>
+      <thead>
+        <tr><th>Name</th><th>Location</th><th>Skills</th><th>Availability</th></tr>
+      </thead>
+      <tbody id="volunteerTableBody"></tbody>
+    </table>
+  </div>
+</section>
+
+<div class="modal-backdrop" id="volSuccessModal">
+  <div class="modal-box glass-strong text-center">
+    <button type="button" class="modal-close" id="volSuccessClose">&times;</button>
+    <div class="check-pop">✓</div>
+    <h3>Welcome to the network</h3>
+    <p>Thank you for registering. We'll contact you at the number you provided when help is needed nearby.</p>
+    <button type="button" class="btn btn-signal btn-block" onclick="document.getElementById('volSuccessModal').classList.remove('show')">Done</button>
+  </div>
+</div>
+
+<footer class="container">
+  <div class="footer-bottom">
+    <span>© 2026 Smart Disaster Response &amp; Rescue System</span>
+    <span>Built for communities, run by volunteers.</span>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script src="volunteer.js"></script>
+</body>
+</html>

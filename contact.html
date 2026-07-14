@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emergency Contacts — SDRRS</title>
+<link rel="stylesheet" href="smooth-transitions.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="animations.css">
+<style>
+  .contact-card{ display:flex; align-items:center; gap:18px; padding:24px; border-radius:var(--radius-lg); }
+  .contact-ic{ width:52px; height:52px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px; flex:none; }
+  .contact-num{ font-family:var(--font-mono); font-size:22px; font-weight:600; color:var(--text-primary); }
+  .contact-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+  @media (max-width:700px){ .contact-grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark"></span>
+      <span>SDRRS<br><small>DISASTER RESPONSE NETWORK</small></span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="report.html">Report</a></li>
+        <li><a href="map.html">Live Map</a></li>
+        <li><a href="volunteer.html">Volunteer</a></li>
+        <li><a href="contact.html">Contacts</a></li>
+        <li><a href="chatbot.html">First Aid AI</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta"><a href="report.html" class="btn btn-signal btn-sm">Report now</a></div>
+    <button type="button" class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+  </div>
+</header>
+
+<div class="container page-head" data-reveal>
+  <div class="eyebrow">Save these numbers</div>
+  <h1>Emergency contacts</h1>
+  <p>Tap any number to call directly. These default to Ghana's national hotlines — update them in <code class="mono">contacts.html</code> for your own country.</p>
+</div>
+
+<section class="container" style="padding-bottom:60px;">
+  <div class="contact-grid">
+    <a href="tel:191" class="contact-card glass" data-reveal>
+      <div class="contact-ic ic-signal">👮</div>
+      <div><div class="contact-num">191</div><p style="margin:2px 0 0;">Police Emergency</p></div>
+    </a>
+    <a href="tel:192" class="contact-card glass" data-reveal style="--delay:.05s">
+      <div class="contact-ic ic-alert">🔥</div>
+      <div><div class="contact-num">192</div><p style="margin:2px 0 0;">Fire Service</p></div>
+    </a>
+    <a href="tel:193" class="contact-card glass" data-reveal style="--delay:.1s">
+      <div class="contact-ic ic-rescue">🚑</div>
+      <div><div class="contact-num">193</div><p style="margin:2px 0 0;">Ambulance / NAS</p></div>
+    </a>
+    <a href="tel:112" class="contact-card glass" data-reveal style="--delay:.15s">
+      <div class="contact-ic ic-amber">🌊</div>
+      <div><div class="contact-num">112</div><p style="margin:2px 0 0;">NADMO Disaster Hotline</p></div>
+    </a>
+    <a href="tel:+233302772222" class="contact-card glass" data-reveal style="--delay:.2s">
+      <div class="contact-ic ic-signal">🏥</div>
+      <div><div class="contact-num mono" style="font-size:17px;">+233 30 277 2222</div><p style="margin:2px 0 0;">Ghana Health Service</p></div>
+    </a>
+    <a href="tel:999" class="contact-card glass" data-reveal style="--delay:.25s">
+      <div class="contact-ic ic-alert">🌍</div>
+      <div><div class="contact-num">999 / 112</div><p style="margin:2px 0 0;">International GSM emergency</p></div>
+    </a>
+  </div>
+
+  <div class="glass" style="padding:26px 30px;margin-top:30px;" data-reveal>
+    <h3 style="margin-bottom:8px;">Not in Ghana?</h3>
+    <p style="margin:0;">Emergency numbers vary by country. If you're deploying SDRRS elsewhere, swap in your own local police, fire, ambulance and disaster-management numbers on this page.</p>
+  </div>
+</section>
+
+<footer class="container">
+  <div class="footer-bottom">
+    <span>© 2026 Smart Disaster Response &amp; Rescue System</span>
+    <span>Built for communities, run by volunteers.</span>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script src="contact.js"></script>
+</body>
+</html>

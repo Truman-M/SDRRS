@@ -1,0 +1,305 @@
+/* ============================================================
+   Smooth Transitions & Page Animations
+   ============================================================ */
+
+/* Page entrance fade */
+body {
+  animation: pageEnter 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Link hover glow effect */
+a {
+  position: relative;
+}
+
+a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--signal), transparent);
+  transition: width 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+a:hover::after {
+  width: 100%;
+}
+
+/* Card entrance animation */
+.glass {
+  animation: cardSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: center top;
+}
+
+@keyframes cardSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Button scale on hover */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+  pointer-events: none;
+}
+
+.btn:hover::before {
+  opacity: 1;
+}
+
+/* Form input focus animation */
+input:focus,
+select:focus,
+textarea:focus {
+  animation: inputPulse 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+@keyframes inputPulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--signal);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(35, 51, 231, 0.1);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(35, 51, 231, 0);
+  }
+}
+
+/* Smooth tab/section transitions */
+[data-tab-content] {
+  animation: tabSlideIn 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+@keyframes tabSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* List item stagger animation */
+.list-item,
+.stat-card,
+.tilt-card {
+  animation: listItemEnter 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.list-item:nth-child(1) { animation-delay: 0.05s; }
+.list-item:nth-child(2) { animation-delay: 0.1s; }
+.list-item:nth-child(3) { animation-delay: 0.15s; }
+.list-item:nth-child(4) { animation-delay: 0.2s; }
+.list-item:nth-child(5) { animation-delay: 0.25s; }
+.list-item:nth-child(6) { animation-delay: 0.3s; }
+
+.stat-card:nth-child(1) { animation-delay: 0.1s; }
+.stat-card:nth-child(2) { animation-delay: 0.2s; }
+.stat-card:nth-child(3) { animation-delay: 0.3s; }
+.stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+.tilt-card:nth-child(1) { animation-delay: 0.05s; }
+.tilt-card:nth-child(2) { animation-delay: 0.1s; }
+.tilt-card:nth-child(3) { animation-delay: 0.15s; }
+.tilt-card:nth-child(4) { animation-delay: 0.2s; }
+.tilt-card:nth-child(5) { animation-delay: 0.25s; }
+.tilt-card:nth-child(6) { animation-delay: 0.3s; }
+
+@keyframes listItemEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Button press effect */
+.btn:active {
+  animation: buttonPress 0.2s cubic-bezier(0.6, 0, 0.4, 1);
+}
+
+@keyframes buttonPress {
+  50% {
+    transform: scale(0.96);
+  }
+}
+
+/* Heading entrance */
+h1, h2, h3, h4 {
+  animation: headingEnter 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+
+h1 { animation-delay: 0.1s; }
+h2 { animation-delay: 0.15s; }
+h3 { animation-delay: 0.2s; }
+h4 { animation-delay: 0.05s; }
+
+@keyframes headingEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Paragraph fade in */
+p {
+  animation: paragraphEnter 0.6s cubic-bezier(0.4, 0.0, 0.2, 1) backwards;
+}
+
+p { animation-delay: 0.2s; }
+
+@keyframes paragraphEnter {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth scrollbar behavior */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--signal);
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--c1);
+}
+
+/* Modal/Dialog entrance */
+.modal,
+[role="dialog"] {
+  animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Toast notification slide */
+.toast {
+  animation: toastSlide 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes toastSlide {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Smooth background transitions */
+body {
+  transition: background 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* Navigation smooth slide */
+.nav-links.open {
+  animation: navSlideDown 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+@keyframes navSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Icon rotation on hover */
+.icon-rotate:hover {
+  transform: rotate(12deg) scale(1.05);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Gradient animation */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradient-animate {
+  background-size: 200% 200%;
+  animation: gradientShift 6s ease infinite;
+}
+
+/* Respects prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
