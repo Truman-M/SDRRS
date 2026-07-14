@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Rescue - Emergency Communications Directory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="min-h-screen text-slate-100">
+
+    <nav id="headerHost" class="sticky top-0 z-40 w-full glass-panel border-b border-slate-800/60 px-4 py-3 lg:px-8">
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+                <h1 class="text-2xl md:text-3xl font-black uppercase tracking-wide flex items-center gap-2"><i
+                        class="fa-solid fa-address-book text-blue-400"></i> Tactical Communication Directives</h1>
+                <p class="text-xs text-slate-400 tracking-wider">Instant VOIP dispatch links to structural protection
+                    nodes and tactical command vectors.</p>
+            </div>
+            <div class="relative w-full sm:w-64">
+                <input type="text" id="directorySearch" oninput="filterDirectory()"
+                    placeholder="Filter nodes (e.g. fire, medical)..."
+                    class="w-full bg-slate-900/80 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-xs focus:outline-none focus:border-blue-500 text-slate-200">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-500 text-xs"></i>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="directoryGrid">
+            <div class="p-4 glass-panel hover:border-blue-500/40 rounded-2xl flex items-center justify-between directory-node"
+                data-name="paramedic ambulance health emergency clinical trauma">
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 text-lg">
+                        <i class="fa-solid fa-truck-medical"></i></div>
+                    <div>
+                        <h3 class="text-sm font-bold text-slate-100">Trauma Paramedic Emergency Matrix</h3>
+                        <p class="text-[11px] font-mono text-slate-500">Routing Index: 911-MED-CORE</p>
+                    </div>
+                </div>
+                <button onclick="triggerMockCall('911 (Medical)')"
+                    class="w-10 h-10 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-xl text-emerald-400 transition-colors flex items-center justify-center"><i
+                        class="fa-solid fa-phone"></i></button>
+            </div>
+
+            <div class="p-4 glass-panel hover:border-blue-500/40 rounded-2xl flex items-center justify-between directory-node"
+                data-name="fire department suppression hazard structural smoke flames">
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-400 text-lg">
+                        <i class="fa-solid fa-fire-extinguisher"></i></div>
+                    <div>
+                        <h3 class="text-sm font-bold text-slate-100">Fire Suppression Systems Branch</h3>
+                        <p class="text-[11px] font-mono text-slate-500">Routing Index: 911-FIRE-TACTICAL</p>
+                    </div>
+                </div>
+                <button onclick="triggerMockCall('911 (Fire)')"
+                    class="w-10 h-10 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-xl text-emerald-400 transition-colors flex items-center justify-center"><i
+                        class="fa-solid fa-phone"></i></button>
+            </div>
+
+            <div class="p-4 glass-panel hover:border-blue-500/40 rounded-2xl flex items-center justify-between directory-node"
+                data-name="tactical police enforcement rescue secure patrol tracking">
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-lg">
+                        <i class="fa-solid fa-building-shield"></i></div>
+                    <div>
+                        <h3 class="text-sm font-bold text-slate-100">Tactical Police Enforcement Array</h3>
+                        <p class="text-[11px] font-mono text-slate-500">Routing Index: 911-LEO-MATRIX</p>
+                    </div>
+                </div>
+                <button onclick="triggerMockCall('911 (Police)')"
+                    class="w-10 h-10 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-xl text-emerald-400 transition-colors flex items-center justify-center"><i
+                        class="fa-solid fa-phone"></i></button>
+            </div>
+
+            <div class="p-4 glass-panel hover:border-blue-500/40 rounded-2xl flex items-center justify-between directory-node"
+                data-name="maritime coast guard flood rescue oceanic watercraft navy">
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 text-lg">
+                        <i class="fa-solid fa-ship"></i></div>
+                    <div>
+                        <h3 class="text-sm font-bold text-slate-100">Coast Guard Inundation Command</h3>
+                        <p class="text-[11px] font-mono text-slate-500">Routing Index: 911-COAST-GRID</p>
+                    </div>
+                </div>
+                <button onclick="triggerMockCall('Maritime Support Cluster')"
+                    class="w-10 h-10 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-xl text-emerald-400 transition-colors flex items-center justify-center"><i
+                        class="fa-solid fa-phone"></i></button>
+            </div>
+        </div>
+    </main>
+
+    <div id="chatbotHost" class="fixed bottom-6 left-6 z-40 flex flex-col items-start"></div>
+
+    <script src="app.js"></script>
+    <script>initializePageStructure("directory.html");</script>
+</body>
+
+</html>
